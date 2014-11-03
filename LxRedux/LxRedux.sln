@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LxRedux", "LxRedux.csproj", "{2F3CC9E5-DF93-4CDD-A9C5-9DDBBF5485A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLxRedux", "..\TestLxRedux\TestLxRedux.csproj", "{A1CDAC07-FD70-4038-9B9A-4877B3D65CE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "..\Utility\Utility.csproj", "{16AF64A5-52DC-4038-A27D-EBA7672D1CCD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16AF64A5-52DC-4038-A27D-EBA7672D1CCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16AF64A5-52DC-4038-A27D-EBA7672D1CCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16AF64A5-52DC-4038-A27D-EBA7672D1CCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16AF64A5-52DC-4038-A27D-EBA7672D1CCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F3CC9E5-DF93-4CDD-A9C5-9DDBBF5485A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F3CC9E5-DF93-4CDD-A9C5-9DDBBF5485A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F3CC9E5-DF93-4CDD-A9C5-9DDBBF5485A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F3CC9E5-DF93-4CDD-A9C5-9DDBBF5485A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1CDAC07-FD70-4038-9B9A-4877B3D65CE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1CDAC07-FD70-4038-9B9A-4877B3D65CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1CDAC07-FD70-4038-9B9A-4877B3D65CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1CDAC07-FD70-4038-9B9A-4877B3D65CE6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = ..\TestLxRedux\TestLxRedux.csproj
+	EndGlobalSection
+EndGlobal
