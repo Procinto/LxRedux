@@ -56,6 +56,40 @@ namespace Procinto.TestLxRedux
 		[Test]
 		public void TestCumulativeIndices ()
 		{
+			Abceq qa11a = new Abceq (abcAF, abc123, abc123, abcAF);
+			Abceq qa = new Abceq (abcAF);
+			Abceq q1a = new Abceq (abc123, abcAF);
+
+			List<int> indices;
+			long cumulative;
+
+			// a; first
+			indices = new List<int> ().And (0);
+			cumulative = qa.CumulativeIndex (indices);
+			Assert.AreEqual (0, cumulative);
+
+			// f; last
+			indices = new List<int> ().And (5);
+			cumulative = qa.CumulativeIndex (indices);
+			Assert.AreEqual (5, cumulative);
+
+			// 1a; first carryover
+			indices = new List<int> ().And (1).And (0);
+			cumulative = q1a.CumulativeIndex (indices);
+			Assert.AreEqual (0 + 1 * 6, cumulative);
+
+
+			// b21c
+			indices = new List<int> ()
+				.And (1).And (1).And (0).And (2);
+			cumulative = qa11a.CumulativeIndex (indices);
+			Assert.AreEqual (2 + 0 * 6 + 1 * 6 * 3 + 1 * 6 * 3 * 3, cumulative);
+
+		}
+
+		[Test]
+		public void TestCalculateIndividualIndices ()
+		{
 			// TODO HERE
 		}
 	}

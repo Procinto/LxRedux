@@ -26,6 +26,10 @@ namespace Procinto.LxRedux
 				return;
 			}
 
+			foreach (var _ in Abc) {
+				Weights.Add (0L);
+			}
+
 			int index = Weights.Count - 1;
 			Weights [index] = 1;
 			for (index--; index >= 0; index--) {
@@ -33,16 +37,16 @@ namespace Procinto.LxRedux
 			}
 		}
 
-		long Weight (int index)
+		long Weight (int position)
 		{
-			if (index < 0 || index >= Abc.Count) {
+			if (position < 0 || position >= Abc.Count) {
 				// TODO error
 				return 0L;
 			}
 			if (null == Weights) {
 				CalculateWeights ();
 			}
-			return Weights [index];
+			return Weights [position];
 		}
 		#endregion
 
@@ -96,11 +100,36 @@ namespace Procinto.LxRedux
 
 			int position = 0;
 			foreach (var index in charIndices) {
-				if (position >= this.Weights.Count) {
-					throw new LxException ("CumulativeIndex too many indices, more than " + this.Weights.Count);
-				}
 				retval += Weight (position) * index;
+				position++;
 			}
+			return retval;
+		}
+
+		public List<int> CalculateIndividualIndices (long cumulativeIndex)
+		{
+			if (cumulativeIndex < 0L) {
+				// todo error
+				return null;
+			}
+
+			List<int> retval = new List<int> ();
+			long remainder = cumulativeIndex;
+
+			try {
+				// major to minor
+				for (int pos = 0; pos < Abc.Count -1; pos++) {
+					long w = Weight (pos);
+					int index = (int)(remainder / w); // long integer division
+					remainder -= w * index;
+					retval.Add (index);
+				}
+			} catch (Exception ex) {
+				// todo error
+				return null;
+			}
+			retval.Add ((int)remainder);
+
 			return retval;
 		}
 
@@ -138,6 +167,7 @@ namespace Procinto.LxRedux
 		}
 		#endregion
 
+		// TODO compatible abceq
 
 	}
 }
