@@ -116,19 +116,21 @@ namespace Procinto.LxRedux
 			List<int> retval = new List<int> ();
 			long remainder = cumulativeIndex;
 
-			try {
-				// major to minor
-				for (int pos = 0; pos < Abc.Count -1; pos++) {
-					long w = Weight (pos);
-					int index = (int)(remainder / w); // long integer division
-					remainder -= w * index;
-					retval.Add (index);
+			// major to minor
+			for (int pos = 0; pos < Abc.Count; pos++) {
+				long w = Weight (pos);
+				int index = (int)(remainder / w); // long integer division
+				if (index >= Abc [pos].Length) {
+					throw new LxException ("CalculateIndividualIndices: at position=" + pos 
+						+ " calculated index=" + index + " is beyond the alphabet size=" + Abc [pos].Length
+					);
 				}
-			} catch (Exception ex) {
-				// todo error
-				return null;
+				remainder -= w * index;
+				retval.Add (index);
 			}
-			retval.Add ((int)remainder);
+			if (0 != remainder) {
+				// todo error
+			}
 
 			return retval;
 		}

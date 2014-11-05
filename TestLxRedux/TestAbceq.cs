@@ -13,7 +13,7 @@ namespace Procinto.TestLxRedux
 		string abcAF;
 		string abcAFtoo;
 		string abc123;
-		List<string> listAFtooAF;
+
 		List<string> listAFAFtoo;
 
 		void Setup ()
@@ -21,8 +21,7 @@ namespace Procinto.TestLxRedux
 			abcAF = "abcdef";
 			abcAFtoo = "abcdef";
 			abc123 = "123";
-			listAFtooAF = new List<string> ()
-				.And (abcAF).And (abcAFtoo);
+
 			listAFAFtoo = new List<string> ()
 				.And (abcAFtoo).And (abcAF);
 		}
@@ -90,7 +89,78 @@ namespace Procinto.TestLxRedux
 		[Test]
 		public void TestCalculateIndividualIndices ()
 		{
-			// TODO HERE
+			Abceq qa = new Abceq (abcAF);
+
+			var indi = qa.CalculateIndividualIndices (0);
+			Assert.IsNotNull (indi);
+			Assert.AreEqual (1, indi.Count);
+			Assert.AreEqual (0, indi [0]);
+
+			indi = qa.CalculateIndividualIndices (5);
+			Assert.IsNotNull (indi);
+			Assert.AreEqual (1, indi.Count);
+			Assert.AreEqual (5, indi [0]);
+
+			try {
+				indi = qa.CalculateIndividualIndices (6);
+				Assert.Fail ("CalculateIndividualIndices [qa] did not throw exception on an out-of-bounds index");
+			} catch (LxException) {
+				// CalculateIndividualIndices correctly threw an LxException
+			} catch (Exception ex) {
+				Assert.Fail ("CalculateIndividualIndices [qa] threw an exception which is not an LxException: " + ex);
+			}
+
+			Abceq qa11a = new Abceq (abcAF, abc123, abc123, abcAF);
+
+			indi = qa11a.CalculateIndividualIndices (0);
+			Assert.IsNotNull (indi);
+			Assert.AreEqual (4, indi.Count);
+			Assert.AreEqual (0, indi [0]);
+			Assert.AreEqual (0, indi [1]);
+			Assert.AreEqual (0, indi [2]);
+			Assert.AreEqual (0, indi [3]);
+
+			indi = qa11a.CalculateIndividualIndices (1);
+			Assert.IsNotNull (indi);
+			Assert.AreEqual (4, indi.Count);
+			Assert.AreEqual (0, indi [0]);
+			Assert.AreEqual (0, indi [1]);
+			Assert.AreEqual (0, indi [2]);
+			Assert.AreEqual (1, indi [3]);
+
+			indi = qa11a.CalculateIndividualIndices (5);
+			Assert.IsNotNull (indi);
+			Assert.AreEqual (4, indi.Count);
+			Assert.AreEqual (0, indi [0]);
+			Assert.AreEqual (0, indi [1]);
+			Assert.AreEqual (0, indi [2]);
+			Assert.AreEqual (5, indi [3]);
+
+			indi = qa11a.CalculateIndividualIndices (6);
+			Assert.IsNotNull (indi);
+			Assert.AreEqual (4, indi.Count);
+			Assert.AreEqual (0, indi [0]);
+			Assert.AreEqual (0, indi [1]);
+			Assert.AreEqual (1, indi [2]);
+			Assert.AreEqual (0, indi [3]);
+
+			indi = qa11a.CalculateIndividualIndices (323);
+			Assert.IsNotNull (indi);
+			Assert.AreEqual (4, indi.Count);
+			Assert.AreEqual (5, indi [0]);
+			Assert.AreEqual (2, indi [1]);
+			Assert.AreEqual (2, indi [2]);
+			Assert.AreEqual (5, indi [3]);
+
+			try {
+				indi = qa11a.CalculateIndividualIndices (324);
+				Assert.Fail ("CalculateIndividualIndices [qa11a] did not throw exception on an out-of-bounds index");
+			} catch (LxException) {
+				// CalculateIndividualIndices correctly threw an LxException
+			} catch (Exception ex) {
+				Assert.Fail ("CalculateIndividualIndices [qa11a] threw an exception which is not an LxException: " + ex);
+			}
+
 		}
 	}
 }
