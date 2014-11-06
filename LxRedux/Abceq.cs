@@ -135,7 +135,7 @@ namespace Procinto.LxRedux
 				retval.Add (index);
 			}
 			if (0 != remainder) {
-				// todo error
+				throw new LxException ("CalculateIndividualIndices: internal error: 0 != remainder=" + remainder);
 			}
 
 			return retval;
@@ -167,15 +167,12 @@ namespace Procinto.LxRedux
 		public string AbcAt (int position)
 		{
 			if (position < 0 || position >= Abc.Count) {
-				// TODO error
-				return null; 
+				throw new LxException ("AbcAt cannot do position=" + position);
 			}
 
 			return Abc [position];
 		}
 		#endregion
-
-		// TODO compatible abceq
 
 	}
 }

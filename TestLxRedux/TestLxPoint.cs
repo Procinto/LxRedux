@@ -84,6 +84,7 @@ namespace Procinto.TestLxRedux
 			// Max from string
 			p.SetFrom ("f33f");
 			Assert.AreEqual ("f33f", p.TextValue);
+			Assert.AreEqual(5 + 2 * 6 + 2 * 6 * 3 + 5 * 6 * 3 * 3, p.NumericValue);
 
 			// Max from number
 			p.SetFrom (5 + 2 * 6 + 2 * 6 * 3 + 5 * 6 * 3 * 3);

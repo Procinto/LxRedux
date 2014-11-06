@@ -28,7 +28,7 @@ namespace Procinto.LxRedux
 		public LxPoint (Abceq sequenceOfAbcs)
 		{
 			Alphabets = sequenceOfAbcs;
-			ResetIndices();
+			ResetIndices ();
 		}
 
 		/// <summary>
@@ -36,11 +36,10 @@ namespace Procinto.LxRedux
 		/// </summary>
 		public LxPoint SetFrom (string textValue)
 		{
-			ResetIndices();
+			ResetIndices ();
 
-			if (null == textValue) {
-				// TODO error
-				return this;
+			if (string.IsNullOrEmpty (textValue)) {
+				throw new LxException ("SetFrom: cannot set from a null or empty string");
 			}
 
 			int position = 0;
@@ -57,13 +56,14 @@ namespace Procinto.LxRedux
 		/// </summary>
 		public LxPoint SetFrom (long numericValue)
 		{
-			ResetIndices();
+			ResetIndices ();
 			this.Indices = this.Alphabets.CalculateIndividualIndices (numericValue);
 			return this;
 		}
 
-		void ResetIndices(){
-			this.Indices = new List<int>();
+		void ResetIndices ()
+		{
+			this.Indices = new List<int> ();
 		}
 
 #endregion

@@ -39,7 +39,6 @@ namespace Procinto.TestLxRedux
 			Assert.AreEqual (1, q1.Index (0, 'b'));
 			Assert.AreEqual (1, q2.Index (0, 'b'));
 
-			// TODO more later if needed.
 		}
 
 		[Test]
@@ -76,7 +75,6 @@ namespace Procinto.TestLxRedux
 			indices = new List<int> ().And (1).And (0);
 			cumulative = q1a.CumulativeIndex (indices);
 			Assert.AreEqual (0 + 1 * 6, cumulative);
-
 
 			// b21c
 			indices = new List<int> ()
