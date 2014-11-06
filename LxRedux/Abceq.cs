@@ -59,10 +59,11 @@ namespace Procinto.LxRedux
 			}
 
 			for (int pos = 0; pos < Abc.Count; pos++) {
-				Indices.Add (new Dictionary<char, int> (Abc [pos].Length));
+				var theAbc = Abc [pos];
+				Indices.Add (new Dictionary<char, int> (theAbc.Length));
 
 				int index = 0;
-				foreach (var ch in Abc[index]) {
+				foreach (var ch in theAbc.ToCharArray()) {
 					Indices [pos] [ch] = index++;
 				}
 			}
@@ -75,14 +76,20 @@ namespace Procinto.LxRedux
 		/// </summary>
 		public int Index (int pos, char ch)
 		{
-			if (pos < 0 || pos > Abc.Count) {
-				// TODO error
-				return 0;
+			if (pos < 0 || pos >= Abc.Count) {
+				throw new LxException ("Index is out of bounds on pos=" + pos + ", max=" + (Abc.Count - 1));
 			}
 			if (null == Indices) {
 				CalculateIndices ();
 			}
-			return Indices [pos] [ch];
+			if (pos > Indices.Count) {
+				throw new LxException ("Index is out of bounds on pos=" + pos + ", should be less than " + Indices.Count);
+			}
+			var theIndex = Indices [pos];
+			if (!theIndex.ContainsKey (ch)) {
+				throw new LxException ("Index is out of bounds: at pos=" + pos + ", ch='" + ch + "' is not defined");
+			}
+			return theIndex [ch];
 
 		}
 
@@ -109,8 +116,7 @@ namespace Procinto.LxRedux
 		public List<int> CalculateIndividualIndices (long cumulativeIndex)
 		{
 			if (cumulativeIndex < 0L) {
-				// todo error
-				return null;
+				throw new LxException ("CalculateIndividualIndices: invalid cumulativeIndex=" + cumulativeIndex);
 			}
 
 			List<int> retval = new List<int> ();

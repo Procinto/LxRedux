@@ -22,10 +22,13 @@ namespace Procinto.LxRedux
 		#endregion
 
 		#region ctor/Create
+		/// <summary>
+		/// Need to provide the space.
+		/// </summary>
 		public LxPoint (Abceq sequenceOfAbcs)
 		{
 			Alphabets = sequenceOfAbcs;
-			Indices = new List<int> ();
+			ResetIndices();
 		}
 
 		/// <summary>
@@ -33,6 +36,8 @@ namespace Procinto.LxRedux
 		/// </summary>
 		public LxPoint SetFrom (string textValue)
 		{
+			ResetIndices();
+
 			if (null == textValue) {
 				// TODO error
 				return this;
@@ -41,7 +46,7 @@ namespace Procinto.LxRedux
 			int position = 0;
 			foreach (var ch in textValue) {
 				int index = Alphabets.Index (position, ch);
-				Indices [position] = index;
+				Indices.Add (index);
 				position++;
 			}
 			return this;
@@ -52,15 +57,29 @@ namespace Procinto.LxRedux
 		/// </summary>
 		public LxPoint SetFrom (long numericValue)
 		{
+			ResetIndices();
 			this.Indices = this.Alphabets.CalculateIndividualIndices (numericValue);
 			return this;
 		}
-		#endregion
+
+		void ResetIndices(){
+			this.Indices = new List<int>();
+		}
+
+#endregion
 
 		#region Value
+		public bool HasBeenSet {
+			get { return null != Indices && Indices.Count > 0; }
+		}
+
 		public string TextValue {
 			// TODO - optimize
-			get { 
+			get {
+				if (!HasBeenSet) {
+					return string.Empty;
+				}
+
 				StringBuilder sb = new StringBuilder ();
 
 				for (int position = 0; position < this.Indices.Count; position ++) {
@@ -76,6 +95,10 @@ namespace Procinto.LxRedux
 		public long NumericValue { 
 			// TODO - optimize
 			get {
+				if (!HasBeenSet) {
+					return -1;
+				}
+
 				return this.Alphabets.CumulativeIndex (this.Indices);
 			}
 		}
