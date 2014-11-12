@@ -54,6 +54,8 @@ namespace Procinto.TestLxRedux
 		[Test]
 		public void TestCumulativeIndices ()
 		{
+			Setup();
+		
 			Abceq qa11a = new Abceq (abcAF, abc123, abc123, abcAF);
 			Abceq qa = new Abceq (abcAF);
 			Abceq q1a = new Abceq (abc123, abcAF);
@@ -87,6 +89,7 @@ namespace Procinto.TestLxRedux
 		[Test]
 		public void TestCalculateIndividualIndices ()
 		{
+			Setup();
 			Abceq qa = new Abceq (abcAF);
 
 			var indi = qa.CalculateIndividualIndices (0);
